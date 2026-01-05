@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dragon Hunter: Top-Down</title>
+    <title>Dragon Slayer: The Binary Cipher</title>
     <style>
         body {
             margin: 0;
@@ -18,246 +18,167 @@
             user-select: none;
         }
 
-        #game-area {
-            width: 800px;
-            height: 600px;
+        #game-box {
+            width: 400px;
+            padding: 30px;
             background: #1b1b1b;
-            background-image: radial-gradient(#2c3e50 1px, transparent 1px);
-            background-size: 40px 40px;
             border: 4px solid #4a0e0e;
+            text-align: center;
             position: relative;
-            overflow: hidden;
-            cursor: crosshair;
+            box-shadow: 0 0 20px #8b0000;
         }
 
-        #hero {
-            width: 50px;
-            height: 50px;
-            font-size: 40px;
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
+        h2 { color: #8b0000; margin-top: 0; }
+
+        .target-display {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
 
-        .dragon {
-            position: absolute;
-            font-size: 45px;
-            transition: transform 0.1s;
-            z-index: 5;
+        #target-number {
+            font-size: 4.5rem;
+            color: gold;
+            display: block;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: transform 0.3s ease;
         }
 
-        .projectile {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: gold;
-            border-radius: 50%;
-            box-shadow: 0 0 10px orange;
+        #binary-string {
+            font-size: 3rem;
+            letter-spacing: 15px;
+            margin: 20px 0;
+            color: #ffd700;
+            font-family: monospace;
         }
 
-        #ui {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 100;
-            pointer-events: none;
-        }
-
-        .screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 200;
-        }
-
-        .btn {
-            padding: 15px 40px;
-            background: #8b0000;
-            color: white;
-            border: 2px solid gold;
-            font-size: 20px;
-            cursor: pointer;
-            text-decoration: none;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             margin-top: 20px;
         }
 
-        .hidden { display: none !important; }
+        .bit-btn {
+            background: #2c3e50;
+            border: 2px solid gold;
+            color: white;
+            padding: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .bit-btn.active {
+            background: #8b0000;
+            box-shadow: inset 0 0 10px black;
+            transform: scale(0.95);
+        }
+
+        #surprise-link {
+            display: none;
+            margin-top: 25px;
+            padding: 18px;
+            background: gold;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+            border-radius: 5px;
+            border: 2px solid #8b0000;
+            animation: glow 0.8s infinite alternate;
+            text-transform: uppercase;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px gold; transform: scale(1); }
+            to { box-shadow: 0 0 25px gold; transform: scale(1.05); }
+        }
+
+        .hint {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div id="game-area">
-        <div id="ui">
-            <div>Kills: <span id="kill-count">0</span> / 10</div>
+    <div id="game-box">
+        <h2>CHAPTER 2: THE CIPHER</h2>
+        <div class="target-display">
+            DECODE THE MAGICAL CONSTANT:
+            <span id="target-number">?</span>
         </div>
 
-        <div id="hero">🛡️</div>
+        <div id="binary-string">0000</div>
 
-        <div id="start-screen" class="screen">
-            <h1>DRAGON SLAYER</h1>
-            <h2>KILL ALL 10 DRAGONS TO UNLOCK THE SURPRISE</h2>
-            <p> | Aim & Click: <b>ATTACK</b></p>
-            <button class="btn" onclick="startGame()">START BATTLE</button>
+        <div class="grid">
+            <button class="bit-btn" onclick="toggleBit(0)">0</button>
+            <button class="bit-btn" onclick="toggleBit(1)">0</button>
+            <button class="bit-btn" onclick="toggleBit(2)">0</button>
+            <button class="bit-btn" onclick="toggleBit(3)">0</button>
         </div>
 
-        <div id="victory-screen" class="screen hidden">
-            <h1 style="color: gold;">DRAGONS DEFEATED!</h1>
-            <p>The Lord has cleared the skies.</p>
-            <a href="w.html" class="btn">PROCEED TO NEXT CHAPTER</a>
-        </div>
+        <div class="hint">BINARY VALUES: 8 | 4 | 2 | 1</div>
+
+        <a href="w.html" id="surprise-link">✨ OPEN THE SURPRISE ✨</a>
     </div>
 
     <script>
-        const area = document.getElementById('game-area');
-        const hero = document.getElementById('hero');
-        const killDisplay = document.getElementById('kill-count');
-        
-        let kills = 0;
-        let gameActive = false;
-        let heroPos = { x: 375, y: 275 };
-        let keys = {};
-        const speed = 7;
-        const targetKills = 10;
+        let target = 0;
+        let bits = [0, 0, 0, 0];
+        const bitValues = [8, 4, 2, 1];
 
-        // Track Movement Keys
-        window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
-        window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
-
-        // Shoot Projectile
-        area.addEventListener('mousedown', e => {
-            if (!gameActive) return;
-            fireStrike(e.clientX, e.clientY);
-        });
-
-        function startGame() {
-            document.getElementById('start-screen').classList.add('hidden');
-            gameActive = true;
-            gameLoop();
-            spawnDragon();
-        }
-
-        function gameLoop() {
-            if (!gameActive) return;
-
-            // Move Hero
-            if (keys['w'] && heroPos.y > 0) heroPos.y -= speed;
-            if (keys['s'] && heroPos.y < 550) heroPos.y += speed;
-            if (keys['a'] && heroPos.x > 0) heroPos.x -= speed;
-            if (keys['d'] && heroPos.x < 750) heroPos.x += speed;
-
-            hero.style.left = heroPos.x + 'px';
-            hero.style.top = heroPos.y + 'px';
-
-            requestAnimationFrame(gameLoop);
-        }
-
-        function spawnDragon() {
-            if (!gameActive || kills >= targetKills) return;
-
-            const dragon = document.createElement('div');
-            dragon.className = 'dragon';
-            dragon.innerText = '🐉';
+        // Function to get a random number between 1 and 15
+        function setNewTarget() {
+            target = Math.floor(Math.random() * 15) + 1;
+            document.getElementById('target-number').innerText = target;
             
-            // Random start position (off-screen)
-            const side = Math.floor(Math.random() * 4);
-            let x, y;
-            if (side === 0) { x = Math.random() * 800; y = -50; } // Top
-            else if (side === 1) { x = 850; y = Math.random() * 600; } // Right
-            else if (side === 2) { x = Math.random() * 800; y = 650; } // Bottom
-            else { x = -50; y = Math.random() * 600; } // Left
+            // Animation effect for new number
+            const el = document.getElementById('target-number');
+            el.style.transform = "scale(1.2)";
+            setTimeout(() => el.style.transform = "scale(1)", 200);
+        }
 
-            dragon.style.left = x + 'px';
-            dragon.style.top = y + 'px';
-            area.appendChild(dragon);
+        function toggleBit(index) {
+            bits[index] = bits[index] === 0 ? 1 : 0;
+            updateUI();
+            checkWin();
+        }
 
-            let dPos = { x, y };
-            let dragonAi = setInterval(() => {
-                if (!gameActive) { clearInterval(dragonAi); return; }
-
-                // Move toward hero (very fast)
-                let angle = Math.atan2(heroPos.y - dPos.y, heroPos.x - dPos.x);
-                dPos.x += Math.cos(angle) * 3.5; // Fast speed
-                dPos.y += Math.sin(angle) * 3.5;
-
-                dragon.style.left = dPos.x + 'px';
-                dragon.style.top = dPos.y + 'px';
-
-                // Check collision with hero
-                let dist = Math.hypot(heroPos.x - dPos.x, heroPos.y - dPos.y);
-                if (dist < 40) {
-                    gameActive = false;
-                    alert("THE DRAGON DEVOURED YOU!");
-                    location.reload();
+        function updateUI() {
+            const btns = document.querySelectorAll('.bit-btn');
+            document.getElementById('binary-string').innerText = bits.join('');
+            
+            bits.forEach((val, i) => {
+                btns[i].innerText = val;
+                if(val === 1) {
+                    btns[i].classList.add('active');
+                } else {
+                    btns[i].classList.remove('active');
                 }
-            }, 20);
-
-            dragon.dataset.timer = dragonAi;
-            setTimeout(spawnDragon, 1200); // Frequency of spawns
+            });
         }
 
-        function fireStrike(targetX, targetY) {
-            const strike = document.createElement('div');
-            strike.className = 'projectile';
-            
-            // Start strike from hero center
-            let sX = heroPos.x + 25;
-            let sY = heroPos.y + 25;
-            strike.style.left = sX + 'px';
-            strike.style.top = sY + 'px';
-            area.appendChild(strike);
+        function checkWin() {
+            let total = 0;
+            bits.forEach((bit, i) => {
+                if(bit === 1) total += bitValues[i];
+            });
 
-            // Calculate trajectory
-            const rect = area.getBoundingClientRect();
-            const angle = Math.atan2((targetY - rect.top) - sY, (targetX - rect.left) - sX);
-            
-            let strikeMove = setInterval(() => {
-                sX += Math.cos(angle) * 12; // Fast projectile
-                sY += Math.sin(angle) * 12;
-                strike.style.left = sX + 'px';
-                strike.style.top = sY + 'px';
-
-                // Hit Detection
-                document.querySelectorAll('.dragon').forEach(dragon => {
-                    let dRect = dragon.getBoundingClientRect();
-                    let sRect = strike.getBoundingClientRect();
-
-                    if (!(sRect.right < dRect.left || sRect.left > dRect.right || 
-                          sRect.bottom < dRect.top || sRect.top > dRect.bottom)) {
-                        
-                        // Kill Dragon
-                        clearInterval(dragon.dataset.timer);
-                        dragon.innerText = '🔥';
-                        setTimeout(() => dragon.remove(), 200);
-                        strike.remove();
-                        clearInterval(strikeMove);
-                        
-                        kills++;
-                        killDisplay.innerText = kills;
-                        if (kills >= targetKills) winGame();
-                    }
-                });
-
-                // Remove strike if out of bounds
-                if (sX < 0 || sX > 800 || sY < 0 || sY > 600) {
-                    strike.remove();
-                    clearInterval(strikeMove);
-                }
-            }, 20);
+            const link = document.getElementById('surprise-link');
+            if(total === target) {
+                link.style.display = "block";
+            } else {
+                link.style.display = "none";
+            }
         }
 
-        function winGame() {
-            gameActive = false;
-            document.getElementById('victory-screen').classList.remove('hidden');
-        }
+        // Initialize the game on load
+        setNewTarget();
     </script>
 </body>
 </html>
