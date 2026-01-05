@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Juniors | Scottish Church</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top, #2b0000, #000 70%);
+      color: #f5f5f5;
+      line-height: 1.7;
+    }
+
+    section {
+      padding: 90px 10%;
+      text-align: center;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cinzel', serif;
+      color: #ffcc99;
+    }
+
+    /* =========================
+       BLOCK 1 – WELCOME
+       ========================= */
+    .welcome {
+      background: linear-gradient(180deg, #120000, #000);
+    }
+
+    .welcome h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .welcome p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1rem;
+      color: #ddd;
+    }
+
+    /* =========================
+       BLOCK 2 – MESSAGE
+       ========================= */
+    .message {
+      background: linear-gradient(180deg, #000, #160000);
+    }
+
+    .message h2 {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+
+    .message p {
+      max-width: 850px;
+      margin: auto;
+      color: #e0e0e0;
+    }
+
+    /* =========================
+       BLOCK 3 – BOXES
+       ========================= */
+    .journey {
+      background: radial-gradient(circle at center, #1a0000, #000 70%);
+    }
+
+    .box-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .box {
+      background: rgba(20, 0, 0, 0.9);
+      border: 1px solid #8b0000;
+      padding: 35px;
+      border-radius: 12px;
+      transition: 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(139, 0, 0, 0.7);
+    }
+
+    .box h3 {
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+    }
+
+    .box p {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    /* =========================
+       BLOCK 4 – GAME
+       ========================= */
+    .game {
+      background: linear-gradient(180deg, #000, #0b0000);
+    }
+
+    .game h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .game p {
+      max-width: 750px;
+      margin: auto;
+      margin-bottom: 40px;
+      color: #ddd;
+    }
+
+    .game a {
+      display: inline-block;
+      padding: 15px 35px;
+      border: 2px solid #ffcc99;
+      border-radius: 30px;
+      font-family: 'Cinzel', serif;
+      color: #ffcc99;
+      letter-spacing: 2px;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    .game a:hover {
+      background: #8b0000;
+      color: #fff;
+      box-shadow: 0 0 25px rgba(255, 140, 0, 0.7);
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+      border-top: 2px solid #8b0000;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BLOCK 1 -->
+  <section class="welcome">
+    <h1>Dear Juniors,</h1>
+    <p>
+      Welcome to <strong>Scottish Church College</strong>.
+      You are no longer strangers — from today, you are part of a legacy,
+      a house built on pride, knowledge, and courage.
+    </p>
+  </section>
+
+  <!-- BLOCK 2 -->
+  <section class="message">
+    <h2>We Know a Lot Is Waiting for You</h2>
+    <p>
+      New challenges. New friendships. New fears and victories.
+      College is not just about classes — it is about discovering who you
+      really are when the world begins to test you.
+    </p>
+  </section>
+
+  <!-- BLOCK 3 -->
+  <section class="journey">
+    <h2>Your Journey Ahead</h2>
+
+    <div class="box-grid">
+      <div class="box">
+        <h3>Semesters</h3>
+        <p>
+          Each semester will shape you — exams, projects,
+          sleepless nights, and lessons that stay for life.
+        </p>
+      </div>
+
+      <div class="box">
+        <h3>Hustles</h3>
+        <p>
+          Balancing academics, passion, and pressure.
+          You’ll learn to fight, fall, rise, and grow stronger.
+        </p>
+      </div>
+
+      <div class="box">
+        <h3>Brotherhood</h3>
+        <p>
+          Friendships that feel like family.
+          These bonds will stand with you long after college ends.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 4 -->
+  <section class="game">
+    <h2>But Before All of This…</h2>
+    <p>
+      Let’s play a small game.  
+      Only those who dare to play will unlock what awaits beyond.
+    </p>
+
+    <a href="k.html">PLAY THE GAME & UNLOCK THE SURPRISE</a>
+  </section>
+
+  <footer>
+    Scottish Church College | Freshers 2026 | Welcome to the Realm
+  </footer>
+
+</body>
+</html>

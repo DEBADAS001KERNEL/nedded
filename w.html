@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freshers  2025</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       GLOBAL STYLES
+       ========================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top, #2b0000, #000000 70%);
+      color: #f5f5f5;
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       HERO SECTION
+       ========================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.85)
+      ), url('https://images.unsplash.com/photo-1520697222860-7b3d1c71b2f5');
+      background-size: cover;
+      background-position: center;
+      border-bottom: 2px solid #8b0000;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.8rem;
+      letter-spacing: 3px;
+      color: #ffcc99;
+      text-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+    }
+
+    .hero h1 span {
+      color: #b30000;
+    }
+
+    .hero p {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+
+    .hero-quote {
+      margin-top: 40px;
+      font-style: italic;
+      color: #ff9966;
+      font-size: 1.1rem;
+    }
+
+    /* =========================
+       COUNTDOWN TIMER
+       ========================= */
+    .countdown {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      background: rgba(20, 0, 0, 0.85);
+      border: 1px solid #8b0000;
+      padding: 12px 16px;
+      border-radius: 8px;
+      min-width: 80px;
+    }
+
+    .time-box h2 {
+      font-family: 'Cinzel', serif;
+      color: #ffcc99;
+      font-size: 1.8rem;
+    }
+
+    .time-box span {
+      font-size: 0.75rem;
+      color: #ccc;
+      letter-spacing: 1px;
+    }
+
+    /* =========================
+       SECTION STYLES
+       ========================= */
+    section {
+      padding: 80px 10%;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: #ffcc99;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(to right, #8b0000, #ffcc99, #8b0000);
+      display: block;
+      margin: 15px auto 0;
+    }
+
+    /* =========================
+       ABOUT SECTION
+       ========================= */
+    .about {
+      background: linear-gradient(180deg, #0b0000, #120000);
+    }
+
+    .about p {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #e0e0e0;
+    }
+
+    /* =========================
+       EVENTS SECTION
+       ========================= */
+    .events {
+      background: linear-gradient(180deg, #120000, #000000);
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .event-card {
+      background: rgba(20, 0, 0, 0.9);
+      border: 1px solid #8b0000;
+      padding: 30px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(139, 0, 0, 0.7);
+    }
+
+    .event-card h3 {
+      font-family: 'Cinzel', serif;
+      color: #ffcc99;
+      margin-bottom: 15px;
+    }
+
+    .event-card p {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    /* =========================
+       QUOTES SECTION
+       ========================= */
+    .quotes {
+      background: radial-gradient(circle at center, #1a0000, #000000 70%);
+    }
+
+    .quote-box {
+      max-width: 800px;
+      margin: 30px auto;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #ffb380;
+      padding: 20px;
+      border-left: 4px solid #8b0000;
+      border-right: 4px solid #8b0000;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+    footer {
+      background: #000000;
+      padding: 40px 10%;
+      text-align: center;
+      border-top: 2px solid #8b0000;
+    }
+
+    footer p {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    footer span {
+      color: #ffcc99;
+      font-weight: 600;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+
+      section {
+        padding: 60px 8%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Freshers<span> 2025 (Jan 10)</span></h1>
+      <p>Where new legends are born and memories are forged in fire.</p>
+
+      <div class="hero-quote">
+        “When the snows fall and the winds of change blow, the lone wolf dies — but the pack survives.”
+      </div>
+
+      <!-- COUNTDOWN TIMER -->
+      <div class="countdown">
+        <div class="time-box">
+          <h2 id="days">00</h2>
+          <span>DAYS</span>
+        </div>
+        <div class="time-box">
+          <h2 id="hours">00</h2>
+          <span>HOURS</span>
+        </div>
+        <div class="time-box">
+          <h2 id="minutes">00</h2>
+          <span>MINUTES</span>
+        </div>
+        <div class="time-box">
+          <h2 id="seconds">00</h2>
+          <span>SECONDS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <h2 class="section-title">Welcome, Young Lords & Ladies</h2>
+    <p>
+      Tonight marks the beginning of your journey. Like the houses of old,
+      you arrive with courage, ambition, and dreams. This Freshers' Night is
+      not just a party — it is a gathering of future leaders, creators, and
+      warriors ready to claim their place.
+    </p>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="events">
+    <h2 class="section-title">The Freshers's  Council</h2>
+    <div class="event-grid">
+      <div class="event-card">
+        <h3>Opening Ceremony</h3>
+        <p>The banners rise, the drums beat, and the realm welcomes its newest members.</p>
+      </div>
+      <div class="event-card">
+        <h3>Talent of the Realm</h3>
+        <p>Sing, rap, dance, or perform — let the realm witness your fire.</p>
+      </div>
+      <div class="event-card">
+        <h3>Games & Trials</h3>
+        <p>Test your wit, strength, and spirit in challenges fit for legends.</p>
+      </div>
+      <div class="event-card">
+        <h3>Feast & Dance</h3>
+        <p>As the night deepens, celebrate with music, food, and unity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTES -->
+  <section class="quotes">
+    <h2 class="section-title">Words to Remember</h2>
+    <div class="quote-box">“Fire will reign, and from it, greatness will rise.”</div>
+    <div class="quote-box">“Every beginning is forged in courage.”</div>
+    <div class="quote-box">“A new house stands tonight — strong, united, and fearless.”</div>
+  </section>
+
+ 
+
+  <!-- COUNTDOWN SCRIPT -->
+  <script>
+    const targetDate = new Date("January 10, 2026 00:00:00").getTime();
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) return;
+
+      document.getElementById("days").innerText =
+        Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      document.getElementById("hours").innerText =
+        Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+      document.getElementById("minutes").innerText =
+        Math.floor((diff / (1000 * 60)) % 60);
+
+      document.getElementById("seconds").innerText =
+        Math.floor((diff / 1000) % 60);
+    }, 1000);
+  </script>
+
+    <!-- REGISTRATION / GOOGLE FORM -->
+  <section class="registration" style="
+    padding: 80px 10%;
+    background: linear-gradient(180deg, #0a0000, #000000);
+    text-align: center;
+    border-top: 2px solid #8b0000;
+  ">
+    <h2 class="section-title">Before the GAME Begins…</h2>
+
+    <p style="
+      max-width: 800px;
+      margin: 0 auto 40px;
+      font-size: 1.1rem;
+      color: #e0e0e0;
+    ">
+      Before all the fire, music, and memories unfold, take a moment to step forward.
+      Register yourself and unlock what awaits beyond the gates.
+    </p>
+
+    <a href="https://forms.gle/qsehBYKdPJgnNpJ38" target="_blank" style="
+      display: inline-block;
+      padding: 16px 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      color: #ffcc99;
+      border: 2px solid #8b0000;
+      border-radius: 40px;
+      background: radial-gradient(circle at center, #3b0000, #120000);
+      box-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
+      transition: all 0.3s ease;
+    "
+    onmouseover="this.style.boxShadow='0 0 35px rgba(255,140,0,0.8)'"
+    onmouseout="this.style.boxShadow='0 0 20px rgba(139,0,0,0.6)'"
+    >
+      Complete Your Registration
+    </a>
+  </section>
+
+   <!-- FOOTER -->
+  <footer>
+    <p>Freshers' Night © 2026 | <span>Welcome to the Realm</span></p>
+  </footer>
+
+
+</body>
+</html>
